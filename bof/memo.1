@@ -1,0 +1,9 @@
+258  echo core > /proc/sys/kernel/core_pattern  
+366  vi 1.c
+367  afl-gcc -o 1 1.c
+368  mkdir input
+369  echo "AAAAA" > input/seed
+370  afl-fuzz -i input -o output -- ./crashme @@
+371  echo core > /proc/sys/kernel/core_pattern
+372  sudo -s
+374  afl-fuzz -i input -o output -- ./1 @@
